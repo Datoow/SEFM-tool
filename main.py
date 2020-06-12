@@ -13,7 +13,7 @@ import expl
 print("Please input a name or file of a dataset:")
 name = input() 
 
-X_train, X_test, y_train, y_test, minF, maxF, minf, maxf = pre.pre_data(name)
+X_train, X_test, y_train, y_test, minF, maxF, minf, maxf = pre.pre_data(name) #data preparation
 
 F = len(X_train[0][0]) #Number of features
 
@@ -25,28 +25,23 @@ print("Please input step_size:")
 step = float(input())
 
 pr = []
-pr_t = []
 mean_acc = 0.0
 pr.append('rank=%d b=%d step_size=%.2f'%(k,b,step))
-pr_t.append('rank=%d b=%d step_size=%.2f'%(k,b,step))
 start = time.time()
 for num in range(0,5): 
-    model = sefm.SEFM(k = k, b = b, F=F, step = step)
-    acc = model.se_fm(X_train[num], y_train[num], X_test[num], y_test[num], minf, maxf)
-    print(model.B)
+    model = sefm.SEFM(k = k, b = b, F=F, step = step) #SEFM
+    acc = model.se_fm(X_train[num], y_train[num], X_test[num], y_test[num], minf, maxf) #calculate accuracy
+    #explanation
     expl.global_expl(model, minF, maxF)
     expl.local_expl(model, X_test[num][0], y_test[num][0], minF, maxF)
-    #print(model.B)
-    #print(sefm.V_)
-    #print(model.w_tilde)
     mean_acc += acc
     pr.append('%.2f%%' %(acc * 100))
 end = time.time()
 mean_acc /= 5
 pr.append('mean=%.2f%%' %(mean_acc * 100))
-pr_t.append('%fs' %((end-start)/5))
+pr.append('%fs' %((end-start)/5))
 print(pr)
-print(pr_t)
+
 print("The Accuracy is:")
 print('%.2f%%' %(mean_acc * 100))
 print("And Running Time is:")
