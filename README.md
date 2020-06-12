@@ -1,8 +1,11 @@
 python3.6 main.py
+
 =========================
 
 pre.py: data preparation
+
 sefm.py: SEFM algorithm and class
+
 expl.py: global and local explanation
 
 =========================
