@@ -37,9 +37,9 @@ for num in range(0,5):
     expl.global_expl(model, minF, maxF)
     print("==========================")
     for i in range(0,5):
-      print("Sample #%d" %num)
+      print("Sample #%d" %i)
       expl.local_expl(model, Dataset[0][i], Dataset[1][i], minF, maxF)
-    print("==========================")
+      print("==========================")
     mean_acc += acc
     pr.append('%.2f%%' %(acc * 100))
 end = time.time()
