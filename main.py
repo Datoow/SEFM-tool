@@ -29,12 +29,15 @@ mean_acc = 0.0
 pr.append('rank=%d b=%d step_size=%.2f'%(k,b,step))
 start = time.time()
 for num in range(0,5): 
+    print(name, "#%d" %num)
     model = sefm.SEFM(k = k, b = b, F=F, step = step) #SEFM
     acc = model.se_fm(X_train[num], y_train[num], X_test[num], y_test[num], minf, maxf) #calculate accuracy
     #explanation
+    print("==========================")
     expl.global_expl(model, minF, maxF)
+    print("==========================")
     expl.local_expl(model, X_test[num][1], y_test[num][1], minF, maxF)
-    print(y_test[num][1])
+    print("==========================")
     mean_acc += acc
     pr.append('%.2f%%' %(acc * 100))
 end = time.time()
@@ -42,6 +45,7 @@ mean_acc /= 5
 pr.append('mean=%.2f%%' %(mean_acc * 100))
 pr.append('%fs' %((end-start)/5))
 print(pr)
+print("==========================")
 
 print("The Accuracy is:")
 print('%.2f%%' %(mean_acc * 100))

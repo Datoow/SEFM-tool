@@ -3,8 +3,9 @@ def global_expl(sefm_model, minF, maxF):
   model = sefm_model
   F = model.F
   B = model.B
-  f_en = 0
+  print("Global explanation")
   print("Explanation of w")
+  f_en = 0
   for f in range(0,F):
     print("Feature %d" %f)
     if(B[f] == 0):
@@ -59,6 +60,7 @@ def local_expl(sefm_model, X, y, minF, maxF):
   F = model.F
   B = model.B
   print("Local explanation")
+  print("The label is %d" %y)
   f_en = 0
   for f in range(0, F):
     print("Feature %d" %f)
