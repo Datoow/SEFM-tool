@@ -13,7 +13,7 @@ import expl
 print("Please input a name or file of a dataset:")
 name = input() 
 
-X_train, X_test, y_train, y_test, minF, maxF, minf, maxf = pre.pre_data(name) #data preparation
+X_train, X_test, y_train, y_test, minF, maxF, minf, maxf, Dataset = pre.pre_data(name) #data preparation
 
 F = len(X_train[0][0]) #Number of features
 
@@ -36,7 +36,9 @@ for num in range(0,5):
     print("==========================")
     expl.global_expl(model, minF, maxF)
     print("==========================")
-    expl.local_expl(model, X_test[num][1], y_test[num][1], minF, maxF)
+    for i in range(0,5):
+      print("Sample #%d" %num)
+      expl.local_expl(model, Dataset[0][i], Dataset[1][i], minF, maxF)
     print("==========================")
     mean_acc += acc
     pr.append('%.2f%%' %(acc * 100))

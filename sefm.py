@@ -83,6 +83,7 @@ class SEFM():
         X = sp.csc_matrix(np.array(X_train_o), dtype=np.float64)
         fmm = fm.fit(X, y_train)
         X2 = sp.csc_matrix(np.array(X_test_o), dtype=np.float64)
+        self.w0_ = fmm.w0_
         self.w_ = fmm.w_
         self.V_ = fmm.V_
         self.w_tilde = np.matmul(self.V_.T, self.V_)
