@@ -33,7 +33,8 @@ for num in range(0,5):
     acc = model.se_fm(X_train[num], y_train[num], X_test[num], y_test[num], minf, maxf) #calculate accuracy
     #explanation
     expl.global_expl(model, minF, maxF)
-    expl.local_expl(model, X_test[num][0], y_test[num][0], minF, maxF)
+    expl.local_expl(model, X_test[num][1], y_test[num][1], minF, maxF)
+    print(y_test[num][1])
     mean_acc += acc
     pr.append('%.2f%%' %(acc * 100))
 end = time.time()

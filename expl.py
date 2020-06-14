@@ -20,9 +20,9 @@ def global_expl(sefm_model, minF, maxF):
   
   print("Explanation of w_tilde")
   f_en1 = 0
-  for f1 in range(0,F):
+  for f1 in range(0, F):
     f_en2 = f_en1 + B[f1]
-    for f2 in range(f1+1,F):
+    for f2 in range(f1+1, F):
       print("Feature %d" %f1, "& Feature %d" %f2)
       if(B[f1] == 0):
         print("Feature %d only has one value." %f1)
@@ -75,8 +75,8 @@ def local_expl(sefm_model, X, y, minF, maxF):
   
   f_en1 = 0
   for f1 in range(0, F):
-    f_en2 = 0
-    for f2 in range(0, F):
+    f_en2 = f_en1 + B[f1]
+    for f2 in range(f1+1, F):
       print("Feature %d" %f1, "& Feature %d" %f2)
       l1 = (maxF[f1] - minF[f1]) / B[f1]
       num1 = int((X[f1] - minF[f1])/l1)
