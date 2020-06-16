@@ -60,9 +60,13 @@ def local_expl(sefm_model, X, y, minF, maxF):
   model = sefm_model
   F = model.F
   B = model.B
+  list_mean = []
+  list_val = []
   print("Local explanation")
   print("The label is %d." %y)
   print("w0 in model is %f." %model.w0_)
+  list_mean.append("w0")
+  list_val.append(model.w0_)
   f_en = 0
   for f in range(0, F):
     print("Feature %d" %f)
@@ -76,8 +80,12 @@ def local_expl(sefm_model, X, y, minF, maxF):
         num -= 1
       if num < B[f]-1:
         print("%f" %val,"<= Feature %d <" %f,"%f: " %(val + l), model.w_[f_en+num])
+        list_mean.append("%f <= Feature %d < %f" %(val, f, val + l))
+        list_val.append(model.w_[f_en+num])
       else:
         print("%f" %val,"<= Feature %d <=" %f,"%f: " %(val + l), model.w_[f_en+num])
+        list_mean.append("%f <= Feature %d <= %f" %(val, f, val + l))
+        list_val.append(model.w_[f_en+num])
     f_en += B[f]
   
   f_en1 = 0
@@ -104,16 +112,29 @@ def local_expl(sefm_model, X, y, minF, maxF):
           if num2 < B[f2]-1:
             print("%f" %val1,"<= Feature %d <" %f1,"%f, " %(val1 + l1),\
               "%f" %val2,"<= Feature %d <" %f2,"%f: " %(val2 + l2), model.w_tilde[f_en1+num1][f_en2+num2])
+            list_mean.append("%f <= Feature %d < %f, %f <= Feature %d < %f" %(val1, f1, val1 + l1, val2, f2, val2 + l2))
+            list_val.append(model.w_tilde[f_en1+num1][f_en2+num2])
           else:
             print("%f" %val1,"<= Feature %d <" %f1,"%f, " %(val1 + l1),\
               "%f" %val2,"<= Feature %d <=" %f2,"%f: " %(val2 + l2), model.w_tilde[f_en1+num1][f_en2+num2])
+            list_mean.append("%f <= Feature %d < %f, %f <= Feature %d <= %f" %(val1, f1, val1 + l1, val2, f2, val2 + l2))
+            list_val.append(model.w_tilde[f_en1+num1][f_en2+num2])
         else:
           if num2 < B[f2]-1:
             print("%f" %val1,"<= Feature %d <=" %f1,"%f, " %(val1 + l1),\
               "%f" %val2,"<= Feature %d <" %f2,"%f: " %(val2 + l2), model.w_tilde[f_en1+num1][f_en2+num2])
+            list_mean.append("%f <= Feature %d <= %f, %f <= Feature %d < %f" %(val1, f1, val1 + l1, val2, f2, val2 + l2))
+            list_val.append(model.w_tilde[f_en1+num1][f_en2+num2])
           else:
             print("%f" %val1,"<= Feature %d <=" %f1,"%f, " %(val1 + l1),\
               "%f" %val2,"<= Feature %d <=" %f2,"%f: " %(val2 + l2), model.w_tilde[f_en1+num1][f_en2+num2])
+            list_mean.append("%f <= Feature %d <= %f, %f <= Feature %d <= %f" %(val1, f1, val1 + l1, val2, f2, val2 + l2))
+            list_val.append(model.w_tilde[f_en1+num1][f_en2+num2])
       f_en2 += B[f2]
     f_en1 += B[f1]
+  
+  print("The list of meaning:")
+  print(list_mean)
+  print("The list of value:")
+  print(list_val)
     

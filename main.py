@@ -23,7 +23,7 @@ print("Please input b:")
 b = int(input())
 print("Please input step_size:")
 step = float(input())
-
+print("==========================")
 pr = []
 mean_acc = 0.0
 pr.append('rank=%d b=%d step_size=%.2f'%(k,b,step))
